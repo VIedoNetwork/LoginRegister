@@ -47,7 +47,6 @@ class App extends Component{
     renderContent = () =>{
         switch(this.state.loggedIn){
 
-            
             case false:
                 return  <ImageBackground style={styles.container} source={BG}>
                             <LoginForm/>
