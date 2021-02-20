@@ -1,38 +1,122 @@
 const { RefreshControlComponent } = require("react-native");
 
 import React, { Component } from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import Logo from './Logo';
-import Signin from './Signin';
+import firebase from 'firebase';
+import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 
-const SignForm = () =>{
+class EmailAndPassWord extends Component{
+    state={
+    email:'',
+    password:'',
+    error:'',
+    loading:false
+    }
+
+    onButtonPressRegister = () => {
+        firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(this.onLoginSuccess)
+        .catch(err => {
+            this.setState({
+                error: err.message
+            })
+        })
+    }
+
+    onButtonPress = () => {
+        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then(this.onLoginSuccess)
+        .catch(err => {
+            this.setState({
+                error: err.message
+            })
+        })
+    }
+
+    onLoginSuccess = () =>{
+        this.setState({
+            error:'',
+            loading:false
+        })
+    }
+
+    render() {
     return (
+
+        //Text input email and password and button
         <View style={styles.container}>
-            <View style={styles.logoContainer}>
-                <Logo/>
-            </View>
-            <View style={styles.emailAndPassword}>
-                <Signin/>  
-            </View>
+
+            <TextInput
+             placeholder="User name " 
+             style={styles.input} 
+             />
+
+            <TextInput
+             placeholder="Email " 
+             style={styles.input} 
+             value={this.state.email}
+             onChangeText={email=>this.setState({email})}
+             />
+
+            <TextInput placeholder="Password " 
+            style={styles.input} 
+            secureTextEntry
+            value={this.state.password}
+            onChangeText={password=>this.setState({password})}/>
+
+            <TouchableOpacity style={styles.buttonContainer} onPress={this.onButtonPressRegister}>
+                <Text style={styles.butonText}> Submit </Text>
+            </TouchableOpacity>
+            <Text style={styles.errorText}> {this.state.error} </Text>
         </View>
-    );
-};
+
+        );
+    }
+}
+
+
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        justifyContent: 'center',
+        padding: 20
 
     },
-
-    logoContainer:{
-        flex:1,
-        alignItems:'center',
-        justifyContent:'center'
+    input:{
+        height:40,
+        backgroundColor: '#FAEBD7',
+        paddingLeft:10,
+        marginBottom:15,
+        borderRadius:5,
+        fontSize:15
     },
-
-    emailAndPassword: {
-        flex:2,
-    }
+    errorText:{
+        fontSize:15,
+        color:'red',
+        alignSelf:'center',
+        marginTop:10
+    },
+    butonText:{
+        textAlign: 'center',
+        color: '#F0FFFF',
+        fontWeight: 'bold',
+        fontSize:20
+    },
+    buttonContainer:{
+        backgroundColor: '#483D8B',
+        padding: 15,
+        borderRadius:8
+    },
+    buttonContainerRegister:{
+        backgroundColor: '#9932CC',
+        padding: 15,
+        borderRadius:8
+    },
+    butonTextRegister:{
+        textAlign: 'center',
+        color: '#F0FFFF',
+        fontWeight: 'bold',
+        fontSize:10
+    },
 });
 
-export default SignForm;
+
+export default EmailAndPassWord;

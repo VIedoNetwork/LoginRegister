@@ -2,7 +2,7 @@ const { RefreshControlComponent } = require("react-native");
 
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import {View, Text, StyleSheet, TextInput, Touchable, TouchableOpacity, Button} from 'react-native';
+import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 
 class EmailAndPassWord extends Component{
     state={
@@ -46,11 +46,6 @@ class EmailAndPassWord extends Component{
         <View style={styles.container}>
 
             <TextInput
-             placeholder="User name " 
-             style={styles.input} 
-             />
-
-            <TextInput
              placeholder="Email " 
              style={styles.input} 
              value={this.state.email}
@@ -64,34 +59,21 @@ class EmailAndPassWord extends Component{
             onChangeText={password=>this.setState({password})}/>
 
             <TouchableOpacity style={styles.buttonContainer} onPress={this.onButtonPress}>
-                <Text style={styles.butonText}> Login </Text>
+                <Text style={styles.butonText}> Submit </Text>
             </TouchableOpacity>
-
-            <TouchableOpacity style={styles.buttonContainer} onPress={this.onButtonPressRegister}>
-                <Text style={styles.butonText}> Sign Up </Text>
-            </TouchableOpacity>
-
-
-
 
             <Text style={styles.errorText}> {this.state.error} </Text>
         </View>
+
         );
     }
-};
-
-
-
-
-
-
-
+}
 
 
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        padding: 20
+        padding: 40
 
     },
     input:{
@@ -112,7 +94,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#F0FFFF',
         fontWeight: 'bold',
-        fontSize:20
+        fontSize:10
     },
     buttonContainer:{
         backgroundColor: '#483D8B',
@@ -121,7 +103,7 @@ const styles = StyleSheet.create({
     },
     buttonContainerRegister:{
         backgroundColor: '#9932CC',
-        padding: 15,
+        padding: 20,
         borderRadius:8
     },
     butonTextRegister:{

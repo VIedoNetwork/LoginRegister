@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import Logo from './Logo';
 import EmailAndPassWord from './EmailAndPassword';
-import SigninForm from './SignInForm'
+import Choose from './Choose';
 const LoginForm = () =>{
     return (
         <View style={styles.container}>
@@ -12,7 +12,7 @@ const LoginForm = () =>{
                 <Logo/>
             </View>
             <View style={styles.emailAndPassword}>
-                <EmailAndPassWord/>  
+                <Choose/>  
             </View>
         </View>
     );

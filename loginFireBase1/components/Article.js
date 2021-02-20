@@ -1,8 +1,9 @@
 const { RefreshControlComponent } = require("react-native");
 
-import React, { Component } from 'react';
-import {View, Text, StyleSheet, Touchable, TouchableOpacity} from 'react-native';
+import React from 'react';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import firebase from 'firebase';
+
 const LoginForm = () =>{
     return (
         <View style={styles.container}>
